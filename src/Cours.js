@@ -5,7 +5,7 @@ function Cours() {
   const [cours, setCours] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/cours')
+    axios.get('bidaya-code-backend-8o3o15x3i-momotech-121s-projects.vercel.app')
       .then(res => setCours(res.data))
       .catch(err => console.error('Erreur:', err));
   }, []);
