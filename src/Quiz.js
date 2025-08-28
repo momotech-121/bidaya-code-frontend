@@ -6,7 +6,7 @@ function Quiz() {
   const [answers, setAnswers] = useState({});
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/quiz')
+   axios.get('https://bidaya-code-backend-8o3o15x3i-momotech-121s-projects.vercel.app/api/quiz')
       .then(res => setQuiz(res.data))
       .catch(err => console.error('Erreur:', err));
   }, []);
