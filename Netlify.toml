@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://bidaya-code-backend-8o3o15x3i-momotech-121s-projects.vercel.app/:splat"
+  status = 200
+  force = true
+  headers = { "x-vercel-protection-bypass" = "11121314151617181920212223242526", "x-vercel-set-bypass-cookie" = "true" }
