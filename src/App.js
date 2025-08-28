@@ -2,6 +2,13 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Cours from './Cours';
+import Quiz from './Quiz';
+import Certificats from './Certificats';
+import Partenariats from './Partenariats';
+import Temoignages from './Temoignages';
+import Contact from './Contact';
+import Profil from './Profil';
 
 function App() {
   return (
@@ -17,6 +24,7 @@ function App() {
             <li className="nav-item"><Link className="nav-link" to="/partenariats">Partenariats</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/temoignages">Témoignages</Link></li>
             <li className="nav-item"><Link className="nav-link" to="/contact">Contact</Link></li>
+            <li className="nav-item"><Link className="nav-link" to="/Profil">Profil</Link></li>
           </ul>
         </div>
       </nav>
@@ -28,6 +36,7 @@ function App() {
         <Route path="/partenariats" element={<Partenariats />} />
         <Route path="/temoignages" element={<Temoignages />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/profil" element={<Profil />} />
       </Routes>
       <footer className="bg-light text-center py-3">
         <p>&copy; 2025 BIDAYA CODE. Tous droits réservés.</p>
@@ -48,12 +57,5 @@ function Home() {
     </main>
   );
 }
-
-function Cours() { return <h2 className="container my-5">Liste des Cours</h2>; }
-function Quiz() { return <h2 className="container my-5">Quiz Interactifs</h2>; }
-function Certificats() { return <h2 className="container my-5">Vos Certificats</h2>; }
-function Partenariats() { return <h2 className="container my-5">Nos Partenaires</h2>; }
-function Temoignages() { return <h2 className="container my-5">Témoignages</h2>; }
-function Contact() { return <h2 className="container my-5">Contactez-nous</h2>; }
 
 export default App;

@@ -1,49 +1,47 @@
+// frontend/src/Quiz.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function Quiz() {
   const [quiz, setQuiz] = useState([]);
-  const [answers, setAnswers] = useState({});
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-   axios.get('https://bidaya-code-backend-8o3o15x3i-momotech-121s-projects.vercel.app/api/quiz')
-      .then(res => setQuiz(res.data))
-      .catch(err => console.error('Erreur:', err));
+    setLoading(true);
+    axios.get('/api/quiz')
+      .then(res => {
+        setQuiz(res.data);
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error('Erreur lors du chargement des quiz:', err);
+        setError('Impossible de charger les quiz. Veuillez réessayer plus tard.');
+        setLoading(false);
+      });
   }, []);
-
-  const handleAnswer = (questionId, answer) => {
-    setAnswers({ ...answers, [questionId]: answer });
-  };
-
-  const submitQuiz = () => {
-    let score = 0;
-    quiz.forEach(q => {
-      if (answers[q._id] === q.correct) score++;
-    });
-    alert(`Score: ${score}/${quiz.length}`);
-  };
 
   return (
     <div className="container my-5">
       <h2>Quiz Interactifs</h2>
-      {quiz.map(q => (
-        <div key={q._id} className="card mb-3">
-          <div className="card-body">
+      {loading && <div className="alert alert-info">Chargement...</div>}
+      {error && <div className="alert alert-danger">{error}</div>}
+      {!loading && quiz.length === 0 && !error && (
+        <div className="alert alert-warning">Aucun quiz disponible.</div>
+      )}
+      <ul className="list-group">
+        {quiz.map(q => (
+          <li key={q._id} className="list-group-item">
             <h5>{q.question}</h5>
-            {q.options.map(option => (
-              <div key={option}>
-                <input
-                  type="radio"
-                  name={`question-${q._id}`}
-                  value={option}
-                  onChange={() => handleAnswer(q._id, option)}
-                /> {option}
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
-      <button className="btn btn-primary" onClick={submitQuiz}>Soumettre</button>
+            <ul>
+              {q.options.map((option, index) => (
+                <li key={index}>{option}</li>
+              ))}
+            </ul>
+            <small className="text-muted">Réponse correcte: {q.correct}</small>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

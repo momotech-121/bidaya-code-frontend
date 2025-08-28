@@ -23,3 +23,6 @@ footer {
 @media (max-width: 768px) {
   .navbar-nav { flex-direction: column; }
 }
+
+.navbar-brand { color: #007bff !important; }
+.btn-primary { background-color: #28a745; border-color: #28a745; }
